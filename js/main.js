@@ -1,5 +1,3 @@
-const searchEl = document.querySelector('.search');
-const searchInputEl = searchEl.querySelector('input');
 const badgeEl = document.querySelector('header .badges');
 const fadeEls = document.querySelectorAll('.visual .fade-in');
 const promotionEl = document.querySelector('.promotion');
@@ -7,6 +5,16 @@ const promotionToggleBtn = document.querySelector('.toggle-promotion');
 const materialIconsEl = promotionToggleBtn.querySelector('.material-icons');
 const toTopEl = document.querySelector('#to-top');
 let isHidePromotion = false;
+
+
+
+toTopEl.addEventListener('click', () => {
+  gsap.to(window, .7,{
+    scrollTo: 0
+  });
+})
+
+scrollEvent();
 
 const scrollEvent = _.throttle(function(){
   if(window.scrollY > 500){
@@ -30,27 +38,7 @@ const scrollEvent = _.throttle(function(){
   }
 }, 300);
 
-toTopEl.addEventListener('click', () => {
-  gsap.to(window, .7,{
-    scrollTo: 0
-  });
-})
 
-scrollEvent();
-
-searchEl.addEventListener('click', function(){
-  searchInputEl.focus();
-});
-
-searchInputEl.addEventListener('focus', function(){
-  searchEl.classList.add('focused');
-  searchInputEl.setAttribute('placeholder', '통합검색');
-});
-
-searchInputEl.addEventListener('blur', function(){
-  searchEl.classList.remove('focused');
-  searchInputEl.setAttribute('placeholder', '');
-});
 
 window.addEventListener('scroll', scrollEvent);
 
@@ -141,7 +129,3 @@ spyEls.forEach((spyEl) => {
     .setClassToggle(spyEl, 'show') // 요소가 화면에 보이면 show 클래스 추가
     .addTo(new ScrollMagic.Controller()) // 컨트롤러에 장면을 할당(필수!)
 });
-
-
-const thisYear = document.querySelector('footer .this-year');
-thisYear.textContent = new Date().getFullYear();
